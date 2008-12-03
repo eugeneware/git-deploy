@@ -1,5 +1,7 @@
 This is the script I wrote to automatically create a new git repository on an ssh server and then point my local git repository origin to it.
 
+You'll need to copy it so that it's in your path (I put it in /usr/local/bin on my Mac)
+
 You use it like this (assume you are working in a directory called mygit):
 
 $ git init .
