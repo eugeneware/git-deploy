@@ -1,0 +1,24 @@
+This is the script I wrote to automatically create a new git repository on an ssh server and then point my local git repository origin to it.
+
+You use it like this (assume you are working in a directory called mygit):
+
+$ git init .
+$ git add .
+$ git commit -a
+$ git deploy you@yourserver.com:~
+
+The result is that your git repository will be copied to your SSH server (eg. you@yourserver.com:~/mygit.git in this example) , and will be set as the origin so that you can just do "git push" and "git pull" with no parameters and it will be applied against this new repository:
+
+$ git pull
+$ git push
+
+If you put a third parameter:
+
+$ git deploy you@yourserver.com:~ backup
+
+Then it will do the same, but not call the remote repository "origin" but will call it "backup" (in this example). 
+
+This means you can easily add remotes, which is useful for backups. This means you'll need to do:
+
+$ git push backup
+$ git pull backup

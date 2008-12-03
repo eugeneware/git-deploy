@@ -1,0 +1,29 @@
+#!/bin/sh
+
+if [[ -n "$2" ]] ; then
+    BRANCH=$2
+else
+    BRANCH="origin"
+fi
+
+FROMDIR=`pwd`
+FROM=`basename "$FROMDIR"`
+TO="$FROM.git"
+TODIR="$FROMDIR.git"
+
+git clone --bare "$FROMDIR" "$TODIR"
+REMOTE="$1/$TO"
+echo $REMOTE
+scp -r "$TODIR" "$REMOTE"
+rm -rf "$TODIR"
+
+git config remote.$BRANCH.url "$REMOTE"
+git config remote.$BRANCH.fetch "+refs/heads/*:refs/remotes/$BRANCH/*"
+
+#git remote add origin $REMOTE
+
+if [[ "$BRANCH" == "origin" ]] ; then
+	git config branch.master.remote $BRANCH
+fi
+
+git config branch.master.merge refs/heads/master
