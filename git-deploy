@@ -1,5 +1,33 @@
 #!/bin/sh
 
+USAGE="Usage: `basename $0` [-ah] sshpath [branchname]"
+
+# we want at least one parameter (it may be a flag or an argument)
+if [ $# -eq 0 ]; then
+	echo $USAGE >&2
+	exit 1
+fi
+
+AUTOPUSH=0
+
+# parse command line arguments
+while getopts ah: OPT; do
+    case "$OPT" in
+	h)	echo $USAGE
+		exit 0
+		;;
+	a)	AUTOPUSH=1
+		;;
+	\?)	# getopts issues an error message
+		echo $USAGE >&2
+		exit 1
+		;;
+    esac
+done
+
+shift `expr $OPTIND - 1`
+
+
 if [[ -n "$2" ]] ; then
     BRANCH=$2
 else
@@ -20,10 +48,16 @@ rm -rf "$TODIR"
 git config remote.$BRANCH.url "$REMOTE"
 git config remote.$BRANCH.fetch "+refs/heads/*:refs/remotes/$BRANCH/*"
 
-#git remote add origin $REMOTE
-
 if [[ "$BRANCH" == "origin" ]] ; then
 	git config branch.master.remote $BRANCH
 fi
 
 git config branch.master.merge refs/heads/master
+
+if [[ $AUTOPUSH == 1 ]] ; then
+	echo "Enablishing auto push on commit"
+	echo "git push" > .git/hooks/post-commit
+	chmod 755 .git/hooks/post-commit
+fi
+
+exit;
