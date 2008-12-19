@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 USAGE="Usage: `basename $0` [-ah] sshpath [branchname]"
 
@@ -11,7 +11,7 @@ fi
 AUTOPUSH=0
 
 # parse command line arguments
-while getopts ah: OPT; do
+while getopts ah OPT; do
     case "$OPT" in
 	h)	echo $USAGE
 		exit 0
@@ -36,13 +36,14 @@ fi
 
 FROMDIR=`pwd`
 FROM=`basename "$FROMDIR"`
-TO="$FROM.git"
+TO="${FROM/ /\\ }.git"
 TODIR="$FROMDIR.git"
 
 git clone --bare "$FROMDIR" "$TODIR"
 REMOTE="$1/$TO"
 echo $REMOTE
 scp -r "$TODIR" "$REMOTE"
+
 rm -rf "$TODIR"
 
 git config remote.$BRANCH.url "$REMOTE"

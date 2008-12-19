@@ -46,3 +46,6 @@ So the very act of committing a file will run a "git push" after the commit. Thi
 This is implemented by putting a "git push" command in the .git/hooks/post-commit file
 
 The default is that this hook ISN'T ADDED. So you need to add the -a to add this in
+
+UPDATE: 19-Dec-2008
+Fixed some bugs concerning pushing repositories with spaces in the file name
