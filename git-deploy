@@ -57,7 +57,7 @@ git config branch.master.merge refs/heads/master
 
 if [[ $AUTOPUSH == 1 ]] ; then
 	echo "Enablishing auto push on commit"
-	echo "git push" > .git/hooks/post-commit
+	echo "git push $BRANCH" > .git/hooks/post-commit
 	chmod 755 .git/hooks/post-commit
 fi
 
