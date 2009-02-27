@@ -49,3 +49,6 @@ The default is that this hook ISN'T ADDED. So you need to add the -a to add this
 
 UPDATE: 19-Dec-2008
 Fixed some bugs concerning pushing repositories with spaces in the file name
+
+UPDATE: 27-Feb-2009
+Made a change so that you can deploy to a server when the folder already exists (useful for shared git repositories where you need to give sudo privileges to create the folder)

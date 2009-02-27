@@ -40,13 +40,13 @@ TO="${FROM/ /\\ }.git"
 TODIR="$FROMDIR.git"
 
 git clone --bare "$FROMDIR" "$TODIR"
-REMOTE="$1/$TO"
+REMOTE="$1"
 echo $REMOTE
 scp -r "$TODIR" "$REMOTE"
 
 rm -rf "$TODIR"
 
-git config remote.$BRANCH.url "$REMOTE"
+git config remote.$BRANCH.url "$REMOTE/$TO"
 git config remote.$BRANCH.fetch "+refs/heads/*:refs/remotes/$BRANCH/*"
 
 if [[ "$BRANCH" == "origin" ]] ; then
