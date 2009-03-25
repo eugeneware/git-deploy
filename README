@@ -53,3 +53,7 @@ Fixed some bugs concerning pushing repositories with spaces in the file name
 UPDATE: 27-Feb-2009
 Made a change so that you can deploy to a server when the folder already exists (useful for shared git repositories where you need to give sudo privileges to create the folder)
 Made the autocommit options work for the specified branch rather than just git push - which affects the origin only.
+
+UPDATE: 25-Mar-2009
+Arlen is a god.
+
