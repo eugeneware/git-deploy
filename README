@@ -55,5 +55,5 @@ Made a change so that you can deploy to a server when the folder already exists 
 Made the autocommit options work for the specified branch rather than just git push - which affects the origin only.
 
 UPDATE: 25-Mar-2009
-Arlen is a god.
+Arlen is a demon.
 
